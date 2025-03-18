@@ -1,0 +1,51 @@
+# ============================
+# Global ignores for fullstack
+# ============================
+
+# Node / React / Vite
+**/node_modules/
+**/dist/
+**/.env.local
+**/.env.development.local
+**/.env.production.local
+**/.env.test.local
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# Vite cache
+**/.vite/
+
+# FastAPI / Python
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+**/*.egg-info/
+**/.mypy_cache/
+**/.pytest_cache/
+**/.vscode/
+**/.DS_Store
+**/.idea/
+
+# Python Virtual Environments
+**/venv/
+**/.env
+**/.venv/
+
+# VSCode settings
+.vscode/
+
+# OS generated
+Thumbs.db
+ehthumbs.db
+.DS_Store
+Icon?
+Desktop.ini
+
+# Docker-related
+**/*.pid
+**/.env
+
+# Log files
+**/*.log
