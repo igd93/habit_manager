@@ -198,6 +198,10 @@ Here’s a concise but complete set of endpoints for the MVP.
    - Install `react-router-dom`, `shadcn-ui` components, and any needed HTTP libraries (axios, fetch).
 2. **Key Pages/Routes**
 
+   - **Landing Page** (`/`)
+
+     - Has Header and Footer, describees the features, offers a sign up
+
    - **Login** (`/login`)
      - Form to submit username/password → receives token → store in local storage or in a secure cookie (simpler for an MVP: local storage).
    - **Signup** (`/signup`)
