@@ -11,14 +11,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # CORS
-    ALLOW_ORIGINS: List[str] = ["http://localhost:5173"]
-    '''
-    @field_validator("ALLOW_ORIGINS", mode="before")
-    def assemble_cors_origins(cls, v):
-        if isinstance(v, str) and not v.startswith("["):
-            return [i.strip() for i in v.split(",")]
-        return v
-    '''
+    ALLOW_ORIGINS: str = "http://localhost:5173"
+    
+    @property
+    def CORS_ORIGINS(self) -> List[str]:
+        return [origin.strip() for origin in self.ALLOW_ORIGINS.split(",")]
+    
     # MinIO configuration
     MINIO_ENDPOINT: str
     MINIO_ACCESS_KEY: str
