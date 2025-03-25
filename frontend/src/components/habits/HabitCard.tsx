@@ -7,15 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-// Habit type definition
-interface Habit {
-  id: number;
-  name: string;
-  description: string;
-  created_at: string;
-  completed_today: boolean;
-}
+import { Habit } from "@/services/habit";
 
 interface HabitCardProps {
   habit: Habit;
@@ -31,11 +23,9 @@ export default function HabitCard({
       <CardHeader>
         <CardTitle className="flex items-start justify-between gap-2">
           <span className="truncate">{habit.name}</span>
-          {habit.completed_today && (
-            <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full flex-shrink-0">
-              Completed
-            </span>
-          )}
+          <span className="text-xs text-muted-foreground">
+            Created {new Date(habit.created_at).toLocaleDateString()}
+          </span>
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-grow">
@@ -45,11 +35,11 @@ export default function HabitCard({
       </CardContent>
       <CardFooter className="pt-4 border-t flex justify-between items-center">
         <Button
-          variant={habit.completed_today ? "outline" : "default"}
+          variant="default"
           onClick={onToggleCompletion}
           className="w-full"
         >
-          {habit.completed_today ? "Undo Completion" : "Mark As Done"}
+          Mark As Done
         </Button>
       </CardFooter>
     </Card>
