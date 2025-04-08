@@ -37,7 +37,7 @@ class BaseService(Generic[ModelType]):
         return db_obj
 
     def delete(self, db: Session, *, id: int) -> ModelType:
-        obj = db.query(self.model).get(id)
+        obj = db.get(self.model, id)
         db.delete(obj)
         db.commit()
         return obj 
