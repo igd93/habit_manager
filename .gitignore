@@ -27,10 +27,17 @@
 **/.vscode/
 **/.DS_Store
 **/.idea/
+**/.env.test
+**/test.db  # SQLite test database
+test.db
+
+# Environment files
+**/.env
+**/.env.*
+!**/.env.*.example  # Keep example environment files in version control
 
 # Python Virtual Environments
 **/venv/
-**/.env
 **/.venv/
 
 # VSCode settings

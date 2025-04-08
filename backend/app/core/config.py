@@ -1,14 +1,19 @@
-from typing import List
+from typing import List, Optional
 from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    # Database settings
-    DATABASE_URL: str
+    PROJECT_NAME: str = "Productivity App"
+    VERSION: str = "1.0.0"
+    API_V1_STR: str = "/api/v1"
     
-    # JWT Authentication
-    SECRET_KEY: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+    # Security
+    SECRET_KEY: str = "your-secret-key-here"  # In production, use environment variable
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    
+    # Database
+    DATABASE_URL: str = "sqlite:///./app.db"
     
     # CORS
     ALLOW_ORIGINS: str = "http://localhost:5173"
@@ -18,9 +23,9 @@ class Settings(BaseSettings):
         return [origin.strip() for origin in self.ALLOW_ORIGINS.split(",")]
     
     # MinIO configuration
-    MINIO_ENDPOINT: str
-    MINIO_ACCESS_KEY: str
-    MINIO_SECRET_KEY: str
+    MINIO_ENDPOINT: str = "localhost:9000"  # Default for tests
+    MINIO_ACCESS_KEY: str = "minioadmin"    # Default for tests
+    MINIO_SECRET_KEY: str = "minioadmin"    # Default for tests
     MINIO_SECURE: bool = False
     
     # Logging
@@ -30,6 +35,7 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
+        extra = "ignore"  # Allow extra fields in environment
 
 
 settings = Settings()  # type: ignore 
