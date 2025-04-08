@@ -13,6 +13,7 @@ class HabitLog(Base):
     log_date = Column(Date, nullable=False)
     status = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
     
     # Define relationships
     habit = relationship("Habit", back_populates="logs") 
