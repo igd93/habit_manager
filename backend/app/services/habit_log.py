@@ -39,7 +39,7 @@ class HabitLogService(BaseService[HabitLog]):
         
         if existing_log:
             existing_log.status = status
-            existing_log.created_at = datetime.utcnow()
+            # Let SQLAlchemy handle updated_at automatically
             db.add(existing_log)
             db.commit()
             db.refresh(existing_log)

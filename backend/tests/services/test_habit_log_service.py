@@ -3,6 +3,7 @@ from datetime import date, datetime, timedelta
 from app.models.habit_log import HabitLog
 from app.models.habit import Habit
 from app.models.user import User
+import time
 
 def test_create_habit_log(db, habit_log_service):
     # Create test user and habit
@@ -81,24 +82,23 @@ def test_update_existing_log(db, habit_log_service):
     db.add(habit)
     db.commit()
     
-    # Create initial log with fixed timestamp
+    # Create initial log
     log_date = date.today()
-    initial_time = datetime(2025, 1, 1, 12, 0, 0)  # Fixed initial time
     initial_log = HabitLog(
         habit_id=habit.id,
         log_date=log_date,
-        status=True,
-        created_at=initial_time,
-        updated_at=initial_time  # Set both timestamps to initial time
+        status=True
     )
     db.add(initial_log)
     db.commit()
+    db.refresh(initial_log)
     
-    # Force a later timestamp for the update
-    update_time = datetime(2025, 1, 1, 12, 0, 1)  # One second later
-    initial_log.updated_at = update_time
-    db.add(initial_log)
-    db.commit()
+    # Store the initial timestamps
+    initial_created_at = initial_log.created_at
+    initial_updated_at = initial_log.updated_at
+    
+    # Wait a small amount of time to ensure timestamp will be different
+    time.sleep(0.1)
     
     # Test updating existing log
     updated_log = habit_log_service.log_completion(
@@ -106,7 +106,8 @@ def test_update_existing_log(db, habit_log_service):
     )
     
     assert updated_log.status is False
-    assert updated_log.updated_at > initial_log.created_at
+    assert updated_log.created_at == initial_created_at  # created_at should not change
+    assert updated_log.updated_at > initial_updated_at   # updated_at should be later
 
 def test_get_habit_logs_empty_range(db, habit_log_service):
     # Create test user and habit
