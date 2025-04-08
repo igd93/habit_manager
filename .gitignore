@@ -29,6 +29,7 @@
 **/.idea/
 **/.env.test
 **/test.db  # SQLite test database
+test.db
 
 # Environment files
 **/.env
