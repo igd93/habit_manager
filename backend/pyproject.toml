@@ -31,7 +31,6 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-profile = "black"
 line_length = 88
 target-version = ["py312"]
 
