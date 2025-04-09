@@ -1,5 +1,5 @@
-from datetime import date, datetime
-from typing import List, Optional
+from datetime import date
+from typing import List
 
 from sqlalchemy.orm import Session
 
@@ -31,15 +31,18 @@ class HabitLogService(BaseService[HabitLog]):
         )
 
         if existing_log:
+            # Use direct attribute assignment for status
             existing_log.status = status
-            # Let SQLAlchemy handle updated_at automatically
             db.add(existing_log)
             db.commit()
             db.refresh(existing_log)
             return existing_log
 
-        # Create new log if none exists
-        db_obj = HabitLog(habit_id=habit_id, log_date=log_date, status=status)
+        # Create new log using proper initialization
+        db_obj = HabitLog()
+        db_obj.habit_id = habit_id
+        db_obj.log_date = log_date
+        db_obj.status = status
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)

@@ -1,7 +1,7 @@
-from datetime import datetime
+from datetime import date, datetime
 
-from sqlalchemy import Boolean, Column, Date, DateTime, ForeignKey, Integer
-from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
 
@@ -9,13 +9,13 @@ from app.db.base_class import Base
 class HabitLog(Base):
     __tablename__ = "habit_logs"
 
-    id = Column(Integer, primary_key=True, index=True)
-    habit_id = Column(Integer, ForeignKey("habits.id"), nullable=False)
-    log_date = Column(Date, nullable=False)
-    status = Column(Boolean, default=False, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = Column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    habit_id: Mapped[int] = mapped_column(ForeignKey("habits.id"), nullable=False)
+    log_date: Mapped[date] = mapped_column(nullable=False)
+    status: Mapped[bool] = mapped_column(default=False, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
 
     # Define relationships

@@ -5,15 +5,14 @@ from sqlalchemy.orm import Session
 
 from app.core.deps import get_current_user
 from app.db.session import get_db
-from app.models.habit import Habit
 from app.models.user import User
-from app.schemas.habit import HabitCreate, HabitResponse, HabitUpdate
+from app.schemas.habit import Habit, HabitCreate, HabitUpdate
 from app.services.habit import habit_service
 
 router = APIRouter()
 
 
-@router.post("/", response_model=HabitResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=Habit, status_code=status.HTTP_201_CREATED)
 def create_habit(
     *,
     db: Session = Depends(get_db),
@@ -24,12 +23,12 @@ def create_habit(
     Create new habit.
     """
     habit = habit_service.create(
-        db, obj_in={"**": habit_in.dict(), "user_id": current_user.id}
+        db, obj_in={"**": habit_in.dict(), "user_id": int(current_user.id)}
     )
     return habit
 
 
-@router.get("/", response_model=List[HabitResponse])
+@router.get("/", response_model=List[Habit])
 def read_habits(
     db: Session = Depends(get_db),
     skip: int = 0,
@@ -40,12 +39,12 @@ def read_habits(
     Retrieve habits.
     """
     habits = habit_service.get_user_habits(
-        db, user_id=current_user.id, skip=skip, limit=limit
+        db, user_id=int(current_user.id), skip=skip, limit=limit
     )
     return habits
 
 
-@router.get("/{habit_id}", response_model=HabitResponse)
+@router.get("/{habit_id}", response_model=Habit)
 def read_habit(
     *,
     db: Session = Depends(get_db),
@@ -58,12 +57,12 @@ def read_habit(
     habit = habit_service.get(db, id=habit_id)
     if not habit:
         raise HTTPException(status_code=404, detail="Habit not found")
-    if habit.user_id != current_user.id:
+    if habit.user_id != int(current_user.id):
         raise HTTPException(status_code=403, detail="Not enough permissions")
     return habit
 
 
-@router.put("/{habit_id}", response_model=HabitResponse)
+@router.put("/{habit_id}", response_model=Habit)
 def update_habit(
     *,
     db: Session = Depends(get_db),
@@ -77,13 +76,13 @@ def update_habit(
     habit = habit_service.get(db, id=habit_id)
     if not habit:
         raise HTTPException(status_code=404, detail="Habit not found")
-    if habit.user_id != current_user.id:
+    if habit.user_id != int(current_user.id):
         raise HTTPException(status_code=403, detail="Not enough permissions")
     habit = habit_service.update(db, db_obj=habit, obj_in=habit_in)
     return habit
 
 
-@router.delete("/{habit_id}", response_model=HabitResponse)
+@router.delete("/{habit_id}", response_model=Habit)
 def delete_habit(
     *,
     db: Session = Depends(get_db),
@@ -93,7 +92,7 @@ def delete_habit(
     """
     Archive a habit.
     """
-    habit = habit_service.archive(db, habit_id=habit_id, user_id=current_user.id)
+    habit = habit_service.archive(db, habit_id=habit_id, user_id=int(current_user.id))
     if not habit:
         raise HTTPException(status_code=404, detail="Habit not found")
     return habit
