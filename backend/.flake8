@@ -1,0 +1,22 @@
+[flake8]
+max-line-length = 100
+extend-ignore = E402
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    *.pyc,
+    *.egg-info,
+    .eggs,
+    .pytest_cache,
+    .venv,
+    .env,
+    alembic/versions/*
+per-file-ignores =
+    __init__.py: F401
+    tests/*: F401
+    app/db/base.py: F401
+    app/core/config.py: F401
+    app/core/security.py: F401
+    app/db/base_class.py: F401 

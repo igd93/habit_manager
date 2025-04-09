@@ -1,7 +1,8 @@
 from datetime import datetime
+from typing import Optional, List
 
-from sqlalchemy import Column, DateTime, Integer, String, Text
-from sqlalchemy.orm import relationship
+from sqlalchemy import String, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
 
@@ -9,17 +10,15 @@ from app.db.base_class import Base
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    username = Column(String(50), unique=True, nullable=False, index=True)
-    password_hash = Column(String(255), nullable=False)
-    avatar_url = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = Column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    username: Mapped[str] = mapped_column(String(50), unique=True, nullable=False, index=True)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    avatar_url: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow, nullable=False)
+    updated_at: Mapped[datetime] = mapped_column(
+        default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
     )
 
     # Define relationships
-    habits = relationship("Habit", back_populates="user", cascade="all, delete-orphan")
-    files = relationship(
-        "File", back_populates="uploader", cascade="all, delete-orphan"
-    )
+    habits: Mapped[List["Habit"]] = relationship(back_populates="user", cascade="all, delete-orphan")
+    files: Mapped[List["File"]] = relationship(back_populates="uploader", cascade="all, delete-orphan")
