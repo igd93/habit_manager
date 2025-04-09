@@ -69,7 +69,7 @@ jobs:
       - name: Install dependencies
         working-directory: ./backend
         run: |
-          poetry install --with dev
+          poetry install --with dev --no-root
 
       - name: Run linting and type checks
         working-directory: ./backend
