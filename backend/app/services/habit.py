@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import List, Optional
 
 from sqlalchemy.orm import Session
@@ -24,7 +24,7 @@ class HabitService(BaseService[Habit]):
         habit = self.get(db, id=habit_id)
         if not habit or habit.user_id != user_id:
             return None
-        habit.archived_at = datetime.utcnow()
+        habit.archived_at = datetime.now(UTC)
         db.add(habit)
         db.commit()
         db.refresh(habit)
