@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Footer() {
   return (
@@ -7,35 +7,24 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="font-bold text-xl mb-4">HabitTracker</div>
-            <p className="text-gray-600">
-              Building better habits, one day at a time.
-            </p>
+            <p className="text-gray-600">Building better habits, one day at a time.</p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Product</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="/#features"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/#features" className="text-gray-600 hover:text-gray-900">
                   Features
                 </a>
               </li>
               <li>
-                <a
-                  href="/#pricing"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/#pricing" className="text-gray-600 hover:text-gray-900">
                   Pricing
                 </a>
               </li>
               <li>
-                <a
-                  href="/#testimonials"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/#testimonials" className="text-gray-600 hover:text-gray-900">
                   Testimonials
                 </a>
               </li>
@@ -51,18 +40,12 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="/#contact"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/#contact" className="text-gray-600 hover:text-gray-900">
                   Contact
                 </a>
               </li>
               <li>
-                <a
-                  href="/#careers"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/#careers" className="text-gray-600 hover:text-gray-900">
                   Careers
                 </a>
               </li>
@@ -73,10 +56,7 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <a
-                  href="/privacy"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/privacy" className="text-gray-600 hover:text-gray-900">
                   Privacy Policy
                 </a>
               </li>
@@ -86,10 +66,7 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="/cookies"
-                  className="text-gray-600 hover:text-gray-900"
-                >
+                <a href="/cookies" className="text-gray-600 hover:text-gray-900">
                   Cookie Policy
                 </a>
               </li>
@@ -98,9 +75,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t mt-12 pt-8 text-center text-gray-600">
-          <p>
-            &copy; {new Date().getFullYear()} HabitTracker. All rights reserved.
-          </p>
+          <p>&copy; {new Date().getFullYear()} HabitTracker. All rights reserved.</p>
         </div>
       </div>
     </footer>

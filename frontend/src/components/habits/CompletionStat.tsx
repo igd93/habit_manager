@@ -1,24 +1,20 @@
-import React from "react";
+import React from 'react';
 
 interface CompletionStatProps {
   completedCount: number;
   totalCount: number;
 }
 
-export default function CompletionStat({
-  completedCount,
-  totalCount,
-}: CompletionStatProps) {
+export default function CompletionStat({ completedCount, totalCount }: CompletionStatProps) {
   // Calculate percentage (safe division to avoid NaN)
-  const percentage =
-    totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
+  const percentage = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
   // Determine color based on completion percentage
   const getColorClass = () => {
-    if (percentage >= 75) return "bg-green-500";
-    if (percentage >= 50) return "bg-blue-500";
-    if (percentage >= 25) return "bg-yellow-500";
-    return "bg-gray-500";
+    if (percentage >= 75) return 'bg-green-500';
+    if (percentage >= 50) return 'bg-blue-500';
+    if (percentage >= 25) return 'bg-yellow-500';
+    return 'bg-gray-500';
   };
 
   return (

@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import MainLayout from "@/components/layout/MainLayout";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import MainLayout from '@/components/layout/MainLayout';
+import { Button } from '@/components/ui/button';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setError('');
 
     try {
       // In a real app, make API call to /auth/login
@@ -34,22 +34,22 @@ export default function LoginPage() {
       const mockResponse = {
         ok: true,
         json: async () => ({
-          access_token: "mock_token",
-          token_type: "bearer",
+          access_token: 'mock_token',
+          token_type: 'bearer',
         }),
       };
 
       if (mockResponse.ok) {
         const data = await mockResponse.json();
         // Store token in localStorage
-        localStorage.setItem("token", data.access_token);
+        localStorage.setItem('token', data.access_token);
         // Redirect to dashboard
-        navigate("/dashboard");
+        navigate('/dashboard');
       } else {
-        setError("Invalid username or password");
+        setError('Invalid username or password');
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError('An error occurred. Please try again.');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -68,17 +68,12 @@ export default function LoginPage() {
           </div>
 
           {error && (
-            <div className="rounded-md bg-destructive/10 p-4 text-sm text-destructive">
-              {error}
-            </div>
+            <div className="rounded-md bg-destructive/10 p-4 text-sm text-destructive">{error}</div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label
-                htmlFor="username"
-                className="text-sm font-medium leading-none"
-              >
+              <label htmlFor="username" className="text-sm font-medium leading-none">
                 Username
               </label>
               <input
@@ -96,16 +91,10 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="text-sm font-medium leading-none"
-                >
+                <label htmlFor="password" className="text-sm font-medium leading-none">
                   Password
                 </label>
-                <Link
-                  to="/forgot-password"
-                  className="text-xs text-primary hover:underline"
-                >
+                <Link to="/forgot-password" className="text-xs text-primary hover:underline">
                   Forgot password?
                 </Link>
               </div>
@@ -123,12 +112,12 @@ export default function LoginPage() {
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Logging in..." : "Log in"}
+              {isLoading ? 'Logging in...' : 'Log in'}
             </Button>
           </form>
 
           <div className="text-center text-sm">
-            Don't have an account?{" "}
+            Don't have an account?{' '}
             <Link to="/signup" className="text-primary hover:underline">
               Sign up
             </Link>

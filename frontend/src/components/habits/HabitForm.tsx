@@ -1,8 +1,8 @@
-import { useState, FormEvent } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useState, FormEvent } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 interface HabitFormProps {
   onSubmit: (name: string, description?: string) => void;
@@ -10,8 +10,8 @@ interface HabitFormProps {
 }
 
 export default function HabitForm({ onSubmit, onCancel }: HabitFormProps) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function HabitForm({ onSubmit, onCancel }: HabitFormProps) {
             <Input
               id="name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
               placeholder="Enter habit name"
               required
             />
@@ -47,7 +47,7 @@ export default function HabitForm({ onSubmit, onCancel }: HabitFormProps) {
             <Textarea
               id="description"
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={e => setDescription(e.target.value)}
               placeholder="Enter habit description"
             />
           </div>

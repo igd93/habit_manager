@@ -1,4 +1,4 @@
-import api from "./api";
+import api from './api';
 
 export interface HabitLog {
   id: number;
@@ -14,19 +14,12 @@ export interface HabitLogCreate {
 }
 
 class HabitLogService {
-  async logHabitCompletion(
-    habitId: number,
-    log: HabitLogCreate
-  ): Promise<HabitLog> {
+  async logHabitCompletion(habitId: number, log: HabitLogCreate): Promise<HabitLog> {
     const response = await api.post<HabitLog>(`/habits/${habitId}/log`, log);
     return response.data;
   }
 
-  async getHabitLogs(
-    habitId: number,
-    startDate: string,
-    endDate: string
-  ): Promise<HabitLog[]> {
+  async getHabitLogs(habitId: number, startDate: string, endDate: string): Promise<HabitLog[]> {
     const response = await api.get<HabitLog[]>(`/habits/${habitId}/log`, {
       params: {
         start_date: startDate,
