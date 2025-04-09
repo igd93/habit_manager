@@ -1,17 +1,19 @@
 import os
-from logging.config import fileConfig
-
-from alembic import context
-from sqlalchemy import engine_from_config, pool
 
 # Add the parent directory to the path
 import sys
+from logging.config import fileConfig
+
+from sqlalchemy import engine_from_config, pool
+
+from alembic import context
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
+from app.core.config import settings
+
 # Import the SQLAlchemy Base and models
 from app.db.base import Base
-from app.core.config import settings
 
 # This is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

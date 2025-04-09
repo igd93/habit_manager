@@ -1,17 +1,19 @@
 import os
+from pathlib import Path
+
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 from app.db.base import Base
-from app.services.habit import HabitService
-from app.services.user import UserService
-from app.services.habit_log import HabitLogService
-from app.services.file import FileService
 from app.models.file import File
 from app.models.habit import Habit
-from app.models.user import User
 from app.models.habit_log import HabitLog
-from pathlib import Path
+from app.models.user import User
+from app.services.file import FileService
+from app.services.habit import HabitService
+from app.services.habit_log import HabitLogService
+from app.services.user import UserService
 
 # Load test environment variables
 test_env_path = Path(__file__).parent / ".env.test"

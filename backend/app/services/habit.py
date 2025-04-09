@@ -1,8 +1,10 @@
+from datetime import datetime
 from typing import List, Optional
+
 from sqlalchemy.orm import Session
+
 from app.models.habit import Habit
 from app.services.base import BaseService
-from datetime import datetime
 
 
 class HabitService(BaseService[Habit]):

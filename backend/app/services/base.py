@@ -1,6 +1,7 @@
-from typing import Generic, TypeVar, Type, Optional, List
-from sqlalchemy.orm import Session
+from typing import Generic, List, Optional, Type, TypeVar
+
 from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session
 
 from app.db.base_class import Base
 

@@ -1,5 +1,7 @@
-import pytest
 from datetime import datetime
+
+import pytest
+
 from app.models.habit import Habit
 from app.models.user import User
 

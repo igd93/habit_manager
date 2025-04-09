@@ -1,8 +1,10 @@
 from typing import Optional
+
 from sqlalchemy.orm import Session
+
+from app.core.security import get_password_hash, verify_password
 from app.models.user import User
 from app.services.base import BaseService
-from app.core.security import get_password_hash, verify_password
 
 
 class UserService(BaseService[User]):
