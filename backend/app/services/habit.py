@@ -4,8 +4,11 @@ from app.models.habit import Habit
 from app.services.base import BaseService
 from datetime import datetime
 
+
 class HabitService(BaseService[Habit]):
-    def get_user_habits(self, db: Session, *, user_id: int, skip: int = 0, limit: int = 100) -> List[Habit]:
+    def get_user_habits(
+        self, db: Session, *, user_id: int, skip: int = 0, limit: int = 100
+    ) -> List[Habit]:
         return (
             db.query(Habit)
             .filter(Habit.user_id == user_id)
@@ -25,4 +28,5 @@ class HabitService(BaseService[Habit]):
         db.refresh(habit)
         return habit
 
-habit_service = HabitService(Habit) 
+
+habit_service = HabitService(Habit)

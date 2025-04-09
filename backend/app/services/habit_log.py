@@ -4,14 +4,10 @@ from sqlalchemy.orm import Session
 from app.models.habit_log import HabitLog
 from app.services.base import BaseService
 
+
 class HabitLogService(BaseService[HabitLog]):
     def get_habit_logs(
-        self, 
-        db: Session, 
-        *, 
-        habit_id: int, 
-        start_date: date, 
-        end_date: date
+        self, db: Session, *, habit_id: int, start_date: date, end_date: date
     ) -> List[HabitLog]:
         return (
             db.query(HabitLog)
@@ -22,12 +18,7 @@ class HabitLogService(BaseService[HabitLog]):
         )
 
     def log_completion(
-        self, 
-        db: Session, 
-        *, 
-        habit_id: int, 
-        log_date: date, 
-        status: bool
+        self, db: Session, *, habit_id: int, log_date: date, status: bool
     ) -> HabitLog:
         # Check if log already exists for this date
         existing_log = (
@@ -36,7 +27,7 @@ class HabitLogService(BaseService[HabitLog]):
             .filter(HabitLog.log_date == log_date)
             .first()
         )
-        
+
         if existing_log:
             existing_log.status = status
             # Let SQLAlchemy handle updated_at automatically
@@ -46,14 +37,11 @@ class HabitLogService(BaseService[HabitLog]):
             return existing_log
 
         # Create new log if none exists
-        db_obj = HabitLog(
-            habit_id=habit_id,
-            log_date=log_date,
-            status=status
-        )
+        db_obj = HabitLog(habit_id=habit_id, log_date=log_date, status=status)
         db.add(db_obj)
         db.commit()
         db.refresh(db_obj)
         return db_obj
 
-habit_log_service = HabitLogService(HabitLog) 
+
+habit_log_service = HabitLogService(HabitLog)

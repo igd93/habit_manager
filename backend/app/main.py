@@ -19,16 +19,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Habit Tracker API"}
+
 
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
 
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
     # Ensure MinIO buckets exist
-    ensure_buckets_exist() 
+    ensure_buckets_exist()

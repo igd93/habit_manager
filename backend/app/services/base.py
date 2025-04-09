@@ -6,6 +6,7 @@ from app.db.base_class import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 
+
 class BaseService(Generic[ModelType]):
     def __init__(self, model: Type[ModelType]):
         self.model = model
@@ -13,7 +14,9 @@ class BaseService(Generic[ModelType]):
     def get(self, db: Session, id: int) -> Optional[ModelType]:
         return db.query(self.model).filter(self.model.id == id).first()
 
-    def get_multi(self, db: Session, *, skip: int = 0, limit: int = 100) -> List[ModelType]:
+    def get_multi(
+        self, db: Session, *, skip: int = 0, limit: int = 100
+    ) -> List[ModelType]:
         return db.query(self.model).offset(skip).limit(limit).all()
 
     def create(self, db: Session, *, obj_in: dict) -> ModelType:
@@ -40,4 +43,4 @@ class BaseService(Generic[ModelType]):
         obj = db.query(self.model).get(id)
         db.delete(obj)
         db.commit()
-        return obj 
+        return obj

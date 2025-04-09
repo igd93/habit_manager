@@ -11,6 +11,7 @@ from app.schemas.habit import HabitCreate, HabitResponse, HabitUpdate
 
 router = APIRouter()
 
+
 @router.post("/", response_model=HabitResponse, status_code=status.HTTP_201_CREATED)
 def create_habit(
     *,
@@ -26,6 +27,7 @@ def create_habit(
     )
     return habit
 
+
 @router.get("/", response_model=List[HabitResponse])
 def read_habits(
     db: Session = Depends(get_db),
@@ -40,6 +42,7 @@ def read_habits(
         db, user_id=current_user.id, skip=skip, limit=limit
     )
     return habits
+
 
 @router.get("/{habit_id}", response_model=HabitResponse)
 def read_habit(
@@ -57,6 +60,7 @@ def read_habit(
     if habit.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not enough permissions")
     return habit
+
 
 @router.put("/{habit_id}", response_model=HabitResponse)
 def update_habit(
@@ -77,6 +81,7 @@ def update_habit(
     habit = habit_service.update(db, db_obj=habit, obj_in=habit_in)
     return habit
 
+
 @router.delete("/{habit_id}", response_model=HabitResponse)
 def delete_habit(
     *,
@@ -90,4 +95,4 @@ def delete_habit(
     habit = habit_service.archive(db, habit_id=habit_id, user_id=current_user.id)
     if not habit:
         raise HTTPException(status_code=404, detail="Habit not found")
-    return habit 
+    return habit

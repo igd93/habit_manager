@@ -12,10 +12,10 @@ from app.schemas.token import Token
 
 router = APIRouter()
 
+
 @router.post("/login", response_model=Token)
 def login(
-    db: Session = Depends(get_db),
-    form_data: OAuth2PasswordRequestForm = Depends()
+    db: Session = Depends(get_db), form_data: OAuth2PasswordRequestForm = Depends()
 ) -> Any:
     """
     OAuth2 compatible token login, get an access token for future requests
@@ -37,6 +37,7 @@ def login(
         "token_type": "bearer",
     }
 
+
 @router.post("/signup", status_code=status.HTTP_201_CREATED)
 def signup(
     *,
@@ -54,4 +55,4 @@ def signup(
             detail="Username already registered",
         )
     user = user_service.create(db, obj_in={"username": username, "password": password})
-    return {"message": "User created successfully"} 
+    return {"message": "User created successfully"}

@@ -10,6 +10,7 @@ from app.schemas.user import UserResponse
 
 router = APIRouter()
 
+
 @router.get("/me", response_model=UserResponse)
 def read_user_me(
     current_user: User = Depends(get_current_user),
@@ -18,6 +19,7 @@ def read_user_me(
     Get current user.
     """
     return current_user
+
 
 @router.put("/me/avatar")
 async def update_user_avatar(
@@ -31,4 +33,4 @@ async def update_user_avatar(
     """
     # TODO: Implement file upload to MinIO
     # For now, just return a placeholder response
-    return {"message": "Avatar upload endpoint (MinIO integration pending)"} 
+    return {"message": "Avatar upload endpoint (MinIO integration pending)"}
