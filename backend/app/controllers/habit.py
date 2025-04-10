@@ -78,7 +78,7 @@ def update_habit(
         raise HTTPException(status_code=404, detail="Habit not found")
     if habit.user_id != int(current_user.id):
         raise HTTPException(status_code=403, detail="Not enough permissions")
-    habit = habit_service.update(db, db_obj=habit, obj_in=habit_in)
+    habit = habit_service.update(db, db_obj=habit, obj_in=habit_in.model_dump())
     return habit
 
 

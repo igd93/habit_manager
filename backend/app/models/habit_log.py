@@ -1,13 +1,17 @@
 from datetime import date, datetime
 
 from sqlalchemy import ForeignKey
+from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
 
 
 class HabitLog(Base):
-    __tablename__ = "habit_logs"
+    @declared_attr.directive
+    @classmethod
+    def __tablename__(cls) -> str:
+        return "habit_logs"
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     habit_id: Mapped[int] = mapped_column(ForeignKey("habits.id"), nullable=False)

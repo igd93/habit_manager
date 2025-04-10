@@ -17,11 +17,13 @@ class HabitCreate(HabitBase):
     pass
 
 
-class HabitUpdate(HabitBase):
+class HabitUpdate(BaseModel):
     title: Optional[str] = None
+    description: Optional[str] = None
     frequency: Optional[str] = None
     target_value: Optional[float] = None
     unit: Optional[str] = None
+    is_archived: Optional[bool] = None
 
 
 class HabitInDBBase(HabitBase):

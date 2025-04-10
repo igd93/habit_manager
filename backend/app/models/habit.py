@@ -8,8 +8,6 @@ from app.db.base_class import Base
 
 
 class Habit(Base):
-    __tablename__ = "habits"
-
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(String(100), nullable=False)

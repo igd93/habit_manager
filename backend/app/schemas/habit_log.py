@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from typing import Optional
 
 from pydantic import BaseModel
@@ -12,10 +12,12 @@ class HabitLogBase(BaseModel):
 
 
 class HabitLogCreate(HabitLogBase):
-    pass
+    log_date: date
+    status: bool
 
 
-class HabitLogUpdate(HabitLogBase):
+class HabitLogUpdate(BaseModel):
+    habit_id: Optional[int] = None
     value: Optional[float] = None
     note: Optional[str] = None
     logged_at: Optional[datetime] = None
@@ -31,4 +33,8 @@ class HabitLogInDBBase(HabitLogBase):
 
 
 class HabitLog(HabitLogInDBBase):
+    pass
+
+
+class HabitLogResponse(HabitLogInDBBase):
     pass

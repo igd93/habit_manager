@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Optional
 
 from sqlalchemy import String, Text
+from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
@@ -10,7 +11,10 @@ from app.models.habit import Habit
 
 
 class User(Base):
-    __tablename__ = "users"
+    @declared_attr.directive
+    @classmethod
+    def __tablename__(cls) -> str:
+        return "users"
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     username: Mapped[str] = mapped_column(
