@@ -1,6 +1,6 @@
 # Habit Tracker Application
 
-[![CI](https://github.com/clockiz/productivity/actions/workflows/ci.yml/badge.svg)](https://github.com/clockiz/productivity/actions/workflows/ci.yml)
+[![CI](https://github.com/igd93/habit_manager/actions/workflows/ci.yml/badge.svg)](https://github.com/igd93/habit_manager/actions/workflows/ci.yml)
 
 A full-stack habit tracking application with a React frontend and FastAPI backend.
 
