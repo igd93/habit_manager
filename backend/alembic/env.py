@@ -1,16 +1,19 @@
 import os
-from logging.config import fileConfig
-
-from alembic import context
-from sqlalchemy import engine_from_config, pool
 
 # Add the parent directory to the path
 import sys
+from logging.config import fileConfig
+
+from sqlalchemy import engine_from_config, pool
+
+from alembic import context  # type: ignore
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-# Import the SQLAlchemy Base and models
-from app.db.base import Base
 from app.core.config import settings
+
+# Import all models through base
+from app.db.base import Base  # This imports all models
 
 # This is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -65,16 +68,18 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    section = config.get_section(config.config_ini_section)
+    if section is None:
+        raise ValueError("Config section not found")
+
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
+        section,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
@@ -83,4 +88,4 @@ def run_migrations_online() -> None:
 if context.is_offline_mode():
     run_migrations_offline()
 else:
-    run_migrations_online() 
+    run_migrations_online()

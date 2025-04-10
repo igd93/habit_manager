@@ -1,19 +1,28 @@
-from datetime import datetime
-from sqlalchemy import Column, Integer, Boolean, Date, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
+from datetime import date, datetime
+
+from sqlalchemy import ForeignKey
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base_class import Base
 
 
 class HabitLog(Base):
-    __tablename__ = "habit_logs"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    habit_id = Column(Integer, ForeignKey("habits.id"), nullable=False)
-    log_date = Column(Date, nullable=False)
-    status = Column(Boolean, default=False, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
-    
+    @declared_attr.directive
+    @classmethod
+    def __tablename__(cls) -> str:
+        return "habit_logs"
+
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    habit_id: Mapped[int] = mapped_column(ForeignKey("habit.id"), nullable=False)
+    log_date: Mapped[date] = mapped_column(nullable=False)
+    status: Mapped[bool] = mapped_column(default=False, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        default=datetime.utcnow, nullable=False
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False
+    )
+
     # Define relationships
-    habit = relationship("Habit", back_populates="logs") 
+    habit = relationship("Habit", back_populates="logs")

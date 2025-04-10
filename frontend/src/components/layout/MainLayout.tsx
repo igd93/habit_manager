@@ -1,5 +1,5 @@
-import React from "react";
-import { Helmet } from "react-helmet-async";
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -9,8 +9,8 @@ interface MainLayoutProps {
 
 export default function MainLayout({
   children,
-  title = "HabitTracker - Track and Build Better Habits",
-  description = "A simple and effective way to track and build better habits in your daily life.",
+  title = 'HabitTracker - Track and Build Better Habits',
+  description = 'A simple and effective way to track and build better habits in your daily life.',
 }: MainLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">

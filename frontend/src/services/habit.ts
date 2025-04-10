@@ -1,4 +1,4 @@
-import api from "./api";
+import api from './api';
 
 export interface Habit {
   id: number;
@@ -22,12 +22,12 @@ export interface HabitUpdate {
 
 class HabitService {
   async createHabit(habit: HabitCreate): Promise<Habit> {
-    const response = await api.post<Habit>("/habits", habit);
+    const response = await api.post<Habit>('/habits', habit);
     return response.data;
   }
 
   async getHabits(): Promise<Habit[]> {
-    const response = await api.get<Habit[]>("/habits");
+    const response = await api.get<Habit[]>('/habits');
     return response.data;
   }
 

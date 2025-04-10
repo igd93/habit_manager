@@ -30,6 +30,9 @@
 **/.env.test
 **/test.db  # SQLite test database
 test.db
+**/.coverage
+**/coverage.xml
+**/htmlcov/
 
 # Environment files
 **/.env

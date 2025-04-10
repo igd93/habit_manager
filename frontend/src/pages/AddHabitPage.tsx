@@ -1,44 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import MainLayout from "@/components/layout/MainLayout";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MainLayout from '@/components/layout/MainLayout';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export default function AddHabitPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
+    name: '',
+    description: '',
   });
 
   // Check if user is authenticated
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (!token) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [navigate]);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name.trim()) {
-      toast.error("Habit name is required");
+      toast.error('Habit name is required');
       return;
     }
 
@@ -62,14 +54,14 @@ export default function AddHabitPage() {
       };
 
       if (mockResponse.ok) {
-        toast.success("Habit created successfully");
-        navigate("/dashboard");
+        toast.success('Habit created successfully');
+        navigate('/dashboard');
       } else {
-        toast.error("Failed to create habit");
+        toast.error('Failed to create habit');
       }
     } catch (err) {
       console.error(err);
-      toast.error("An error occurred. Please try again.");
+      toast.error('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -80,25 +72,18 @@ export default function AddHabitPage() {
       <div className="container max-w-2xl mx-auto px-4 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Add New Habit</h1>
-          <p className="text-muted-foreground mt-1">
-            Create a new habit to track daily
-          </p>
+          <p className="text-muted-foreground mt-1">Create a new habit to track daily</p>
         </div>
 
         <Card>
           <CardHeader>
             <CardTitle>Habit Details</CardTitle>
-            <CardDescription>
-              Enter the details of the habit you want to track
-            </CardDescription>
+            <CardDescription>Enter the details of the habit you want to track</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
-                <label
-                  htmlFor="name"
-                  className="text-sm font-medium leading-none"
-                >
+                <label htmlFor="name" className="text-sm font-medium leading-none">
                   Habit Name*
                 </label>
                 <input
@@ -111,16 +96,11 @@ export default function AddHabitPage() {
                   value={formData.name}
                   onChange={handleChange}
                 />
-                <p className="text-xs text-muted-foreground">
-                  A short, clear name for your habit
-                </p>
+                <p className="text-xs text-muted-foreground">A short, clear name for your habit</p>
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="description"
-                  className="text-sm font-medium leading-none"
-                >
+                <label htmlFor="description" className="text-sm font-medium leading-none">
                   Description (Optional)
                 </label>
                 <textarea
@@ -137,15 +117,11 @@ export default function AddHabitPage() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => navigate("/dashboard")}
-                >
+                <Button type="button" variant="outline" onClick={() => navigate('/dashboard')}>
                   Cancel
                 </Button>
                 <Button type="submit" disabled={isLoading}>
-                  {isLoading ? "Creating..." : "Create Habit"}
+                  {isLoading ? 'Creating...' : 'Create Habit'}
                 </Button>
               </div>
             </form>

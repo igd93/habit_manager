@@ -15,6 +15,7 @@ minio_client = Minio(
 AVATAR_BUCKET = "avatars"
 ATTACHMENT_BUCKET = "attachments"
 
+
 def ensure_buckets_exist():
     """
     Ensure the required buckets exist in MinIO.
@@ -37,7 +38,7 @@ def ensure_buckets_exist():
                 ],
             }
             minio_client.set_bucket_policy(AVATAR_BUCKET, policy)
-        
+
         # Check if attachment bucket exists, create if not
         if not minio_client.bucket_exists(ATTACHMENT_BUCKET):
             minio_client.make_bucket(ATTACHMENT_BUCKET)
@@ -54,7 +55,7 @@ def ensure_buckets_exist():
                 ],
             }
             minio_client.set_bucket_policy(ATTACHMENT_BUCKET, policy)
-            
+
     except S3Error as err:
         print(f"Error creating MinIO buckets: {err}")
-        raise 
+        raise

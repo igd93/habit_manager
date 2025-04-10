@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Habit } from "@/services/habit";
-import { habitService } from "@/services/habit";
-import { habitLogService } from "@/services/habitLog";
-import HabitCard from "./HabitCard";
-import CompletionStat from "./CompletionStat";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import HabitForm from "./HabitForm";
+import React, { useEffect, useState } from 'react';
+import { Habit } from '@/services/habit';
+import { habitService } from '@/services/habit';
+import { habitLogService } from '@/services/habitLog';
+import HabitCard from './HabitCard';
+import CompletionStat from './CompletionStat';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import HabitForm from './HabitForm';
 
 export default function HabitList() {
   const [habits, setHabits] = useState<Habit[]>([]);
@@ -22,7 +22,7 @@ export default function HabitList() {
       const habitsData = await habitService.getHabits();
       setHabits(habitsData);
     } catch (error) {
-      console.error("Failed to load habits:", error);
+      console.error('Failed to load habits:', error);
     } finally {
       setIsLoading(false);
     }
@@ -30,7 +30,7 @@ export default function HabitList() {
 
   const handleToggleCompletion = async (habitId: number) => {
     try {
-      const today = new Date().toISOString().split("T")[0];
+      const today = new Date().toISOString().split('T')[0];
       await habitLogService.logHabitCompletion(habitId, {
         log_date: today,
         status: true,
@@ -38,7 +38,7 @@ export default function HabitList() {
       // Refresh habits to get updated completion status
       loadHabits();
     } catch (error) {
-      console.error("Failed to toggle habit completion:", error);
+      console.error('Failed to toggle habit completion:', error);
     }
   };
 
@@ -48,7 +48,7 @@ export default function HabitList() {
       setShowForm(false);
       loadHabits();
     } catch (error) {
-      console.error("Failed to create habit:", error);
+      console.error('Failed to create habit:', error);
     }
   };
 
@@ -56,7 +56,7 @@ export default function HabitList() {
     return <div>Loading habits...</div>;
   }
 
-  const completedCount = habits.filter((habit) => habit.completed_today).length;
+  const completedCount = habits.filter(habit => habit.completed_today).length;
 
   return (
     <div className="space-y-6">
@@ -68,20 +68,12 @@ export default function HabitList() {
         </Button>
       </div>
 
-      <CompletionStat
-        completedCount={completedCount}
-        totalCount={habits.length}
-      />
+      <CompletionStat completedCount={completedCount} totalCount={habits.length} />
 
-      {showForm && (
-        <HabitForm
-          onSubmit={handleCreateHabit}
-          onCancel={() => setShowForm(false)}
-        />
-      )}
+      {showForm && <HabitForm onSubmit={handleCreateHabit} onCancel={() => setShowForm(false)} />}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {habits.map((habit) => (
+        {habits.map(habit => (
           <HabitCard
             key={habit.id}
             habit={habit}

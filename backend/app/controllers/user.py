@@ -1,14 +1,15 @@
 from typing import Any
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
+
+from fastapi import APIRouter, Depends, File, UploadFile
 from sqlalchemy.orm import Session
 
 from app.core.deps import get_current_user
 from app.db.session import get_db
-from app.services.user import user_service
 from app.models.user import User
 from app.schemas.user import UserResponse
 
 router = APIRouter()
+
 
 @router.get("/me", response_model=UserResponse)
 def read_user_me(
@@ -18,6 +19,7 @@ def read_user_me(
     Get current user.
     """
     return current_user
+
 
 @router.put("/me/avatar")
 async def update_user_avatar(
@@ -31,4 +33,4 @@ async def update_user_avatar(
     """
     # TODO: Implement file upload to MinIO
     # For now, just return a placeholder response
-    return {"message": "Avatar upload endpoint (MinIO integration pending)"} 
+    return {"message": "Avatar upload endpoint (MinIO integration pending)"}

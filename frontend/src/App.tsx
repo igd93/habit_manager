@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Toaster } from "sonner";
-import { HelmetProvider } from "react-helmet-async";
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import DashboardPage from "./pages/DashboardPage";
-import AddHabitPage from "./pages/AddHabitPage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import { HelmetProvider } from 'react-helmet-async';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import DashboardPage from './pages/DashboardPage';
+import AddHabitPage from './pages/AddHabitPage';
 
 function App() {
   return (
@@ -24,11 +24,11 @@ function App() {
           position="top-right"
           toastOptions={{
             style: {
-              background: "hsl(var(--background))",
-              color: "hsl(var(--foreground))",
-              border: "1px solid hsl(var(--border))",
+              background: 'hsl(var(--background))',
+              color: 'hsl(var(--foreground))',
+              border: '1px solid hsl(var(--border))',
             },
-            className: "text-foreground",
+            className: 'text-foreground',
           }}
         />
       </BrowserRouter>
