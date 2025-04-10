@@ -18,7 +18,7 @@ class Habit(Base):
     archived_at: Mapped[Optional[datetime]] = mapped_column(nullable=True)
 
     # Define relationships
-    user = relationship("User", back_populates="habits")
+    user = relationship("User", back_populates="habit")
     logs = relationship(
         "HabitLog", back_populates="habit", cascade="all, delete-orphan"
     )

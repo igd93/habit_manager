@@ -30,7 +30,7 @@ class User(Base):
     )
 
     # Define relationships
-    habits: Mapped[List["Habit"]] = relationship(
+    habit: Mapped[List["Habit"]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
     files: Mapped[List["File"]] = relationship(

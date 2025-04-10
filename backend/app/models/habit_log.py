@@ -14,7 +14,7 @@ class HabitLog(Base):
         return "habit_logs"
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
-    habit_id: Mapped[int] = mapped_column(ForeignKey("habits.id"), nullable=False)
+    habit_id: Mapped[int] = mapped_column(ForeignKey("habit.id"), nullable=False)
     log_date: Mapped[date] = mapped_column(nullable=False)
     status: Mapped[bool] = mapped_column(default=False, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
