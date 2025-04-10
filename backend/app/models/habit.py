@@ -14,7 +14,9 @@ class Habit(Base):
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        default=datetime.utcnow, nullable=False
+    )
     archived_at: Mapped[Optional[datetime]] = mapped_column(nullable=True)
 
     # Define relationships

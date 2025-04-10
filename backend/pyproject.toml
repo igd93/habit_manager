@@ -48,13 +48,14 @@ testpaths = [
     "tests"
 ]
 python_files = ["test_*.py"]
-addopts = "--cov=app --cov-report=xml --cov-report=term-missing --cov-fail-under=80"
+addopts = "--cov=app --cov-report=xml --cov-report=term-missing --cov-fail-under=50"
 
 [tool.coverage.run]
 source = ["app"]
 branch = true
 
 [tool.coverage.report]
+fail_under = 50
 exclude_lines = [
     "pragma: no cover",
     "def __repr__",

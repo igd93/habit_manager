@@ -8,7 +8,6 @@ from app.db.session import get_db
 from app.models.user import User
 from app.schemas.user import UserResponse
 
-
 router = APIRouter()
 
 

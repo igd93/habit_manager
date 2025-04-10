@@ -1,8 +1,8 @@
-from typing import Generic, List, Optional, Type, TypeVar, Any
+from typing import Any, Generic, List, Optional, Type, TypeVar
+
+from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
-from sqlalchemy import select
-from fastapi import HTTPException
 
 from app.db.base_class import Base
 
@@ -29,7 +29,9 @@ class BaseService(Generic[ModelType]):
         db.refresh(db_obj)
         return db_obj
 
-    def update(self, db: Session, *, db_obj: ModelType, obj_in: dict[str, Any]) -> ModelType:
+    def update(
+        self, db: Session, *, db_obj: ModelType, obj_in: dict[str, Any]
+    ) -> ModelType:
         if isinstance(obj_in, dict):
             update_data = obj_in
         else:

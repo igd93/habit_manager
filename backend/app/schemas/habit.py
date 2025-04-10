@@ -35,4 +35,4 @@ class HabitInDBBase(HabitBase):
 
 
 class Habit(HabitInDBBase):
-    pass 
+    pass

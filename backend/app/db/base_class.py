@@ -1,6 +1,8 @@
 from typing import Any
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
 from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
 
 class Base(DeclarativeBase):
     # Generate __tablename__ automatically based on class name

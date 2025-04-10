@@ -31,4 +31,4 @@ class HabitLogInDBBase(HabitLogBase):
 
 
 class HabitLog(HabitLogInDBBase):
-    pass 
+    pass
